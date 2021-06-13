@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listings</title>
+    <link rel="stylesheet" type="text/css" href="assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        .my-custom-scrollbar {
+            position: relative;
+            height: 65vh;
+            overflow-x: auto;
+            /*overflow: auto;*/
+            /*white-space: pre-wrap;*/
+            border-bottom: 1px solid #eaeaea;
+
+        }
+        .table-wrapper-scroll-y {
+            display: block;
+        }
+
+
+        #tblListings {
+            text-align: left;
+            /*position: relative;*/
+            border-collapse: collapse;
+
+        }
+        .tr- > th {
+            background: white;
+            position: sticky;
+            top: 0; /* Don't forget this, required for the stickiness */
+            -webkit-box-shadow: 0px 0px 0.5px 0px rgba(0,0,0,0.25);
+            -moz-box-shadow: 0px 0px 0.5px 0px rgba(0,0,0,0.25);
+            box-shadow: 0px 0px 0.5px 0px rgba(0,0,0,0.25);
+            font-size: 11px;
+
+        }
+
+        ._ListinigMainImg{
+            width: 150px;
+            height: 150px;
+            max-width: 150px;
+            max-height: 150px;
+            object-fit: contain;
+        }
+
+        .loading {
+            position: absolute;
+            background: antiquewhite;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            height: fit-content;
+            width: fit-content;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="container-fluid mt-5">
+    <div class="row mb-3">
+        <div class="col-9">
+            <h3>Listings</h3>
+        </div>
+        <div class="col-3">
+            <div class="pull-right card p-3">
+                <div class="col-12 row">
+                    <div class="col-8 text-right">Count: </div><div id="Count" class="col-4 text-left border"></div>
+                    <div class="col-8 text-right">Listed Count: </div><div class="col-4 text-left border" id="listedCount"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-7 mb-3 row" >
+            <div class="col-4">
+                <select id="selectGroupWalmartID" class="form-control">
+                    <option>Default select</option>
+                </select>
+            </div>
+<!--            <div class="col-2">-->
+<!--               <button class="btn btn-outline-info">Filter</button>-->
+<!--            </div>-->
+        </div>
+<!--        <div class="col-1 pl-0 pr-0">-->
+<!--            <div class="input-group ">-->
+<!--                <div class="input-group-prepend">-->
+<!--                    <span class="input-group-text" id="Count-label">Count</span>-->
+<!--                </div>-->
+<!--                <input  disabled="disabled" type="text" class="form-control bg-info text-white" id="Count" aria-describedby="listedCount-label">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-2 pl-1 pr-0">-->
+<!--            <div class="input-group ">-->
+<!--                <div class="input-group-prepend">-->
+<!--                    <span class="input-group-text" id="listedCount-label">Listed Count</span>-->
+<!--                </div>-->
+<!--                <input  disabled="disabled" type="text" class="form-control bg-success text-white" id="listedCount" aria-describedby="listedCount-label">-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="col-5 pl-0">
+            <div class="pull-right">
+                <button id="btnDelete" class="btn btn-danger d-none"><span class="fa fa-trash"></span> Delete</button>
+                <button id="btnModal" class="btn btn-primary"><span class="fa fa-plus"></span> Add</button>
+                <button id="btnRefresh" class=" btn btn-primary"><span class="fa fa-refresh"></span> Refresh</button>
+                <button id="btnDownloadCSV" class=" btn btn-success"><span class="fa fa-file-excel-o"></span> Download CSV</button>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
+                <table id="tblListings" class="table table-bordered table-sm table-hover">
+                    <thead>
+                    <tr class="tr-">
+                        <th style="width: 10px;" ><input type="checkbox" id="chkALL" name="chkALL" /></th>
+                        <th style="width: 10px;" scope="col">Count</th>
+                        <th style="width: 50px;" scope="col">ID</th>
+                        <th style="width: 100px;" scope="col">Status</th>
+                        <th scope="col" style="width: 200px;">Walmart</th>
+                        <th scope="col" style="width: 200px;">Amazon</th>
+                        <th style="width: 10px;" scope="col">Search By</th>
+                    </tr>
+                    </thead>
+                    <tbody style="font-size: 11px;">
+<!--                        <tr class="loading">-->
+<!--                            <td colspan="3">-->
+<!--                                loading-->
+<!--                            </td>-->
+<!--                        </tr>-->
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="assets/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="assets/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="assets/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="assets/moment/min/locales.js"></script>
+<script type="text/javascript" src="assets/bootbox.js/bootbox.all.js"></script>
+<script type="text/javascript" src="assets/bootbox.js/bootbox.locales.js"></script>
+<script type="text/javascript" src="assets/bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js"></script>
+<script type="text/javascript" src="assets/mustache/mustache.min.js"></script>
+<script type="text/javascript" src="assets/js-image-zoom/package/js-image-zoom.js"></script>
+<script type="text/javascript" src="src/js/listings.js"></script>
+</body>
+</html>
